@@ -16,6 +16,8 @@ var passport = require("passport");
 
 var authenticate = require("./authenticate");
 
+var config = require("./config");
+
 var indexRouter = require("./routes/index");
 
 var usersRouter = require("./routes/users");
@@ -34,7 +36,7 @@ const Promotions = require("./models/promotions");
 
 const Leaders = require("./models/leaders");
 
-const url = "mongodb://localhost:27017/conFusion";
+const url = config.mongoUrl;
 
 const connect = mongoose.connect(url, {
   useNewUrlParser: true,
@@ -106,7 +108,7 @@ function auth(req, res, next) {
 }*/
 
 ///////////////////////////USING EXPRESS SESSION & BASIC AUTH///////////////////
-
+/*
 app.use(
   session({
     name: "session-id",
@@ -115,7 +117,8 @@ app.use(
     resave: false,
     store: new FileStore(),
   })
-);
+);*/
+
 /*
 function auth(req, res, next) {
   console.log(req.session);
@@ -179,11 +182,12 @@ function auth(req, res, next) {
 /////////////////////////////// USING PASSPORT //////////////////////////
 
 app.use(passport.initialize());
-app.use(passport.session());
+//app.use(passport.session());
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
+/*
 function auth(req, res, next) {
   console.log(req.user);
 
@@ -196,7 +200,7 @@ function auth(req, res, next) {
   }
 }
 
-app.use(auth);
+app.use(auth);*/
 
 app.use(express.static(path.join(__dirname, "public")));
 
